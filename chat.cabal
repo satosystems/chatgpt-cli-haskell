@@ -6,7 +6,9 @@ cabal-version: 1.12
 
 name:           chat
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/satosystems/chat#readme>
+synopsis:       ChatGPT CLI
+description:    Please see the README on GitHub at <https://github.com/satosystems/chatgpt-cli#readme>
+category:       CLI
 homepage:       https://github.com/satosystems/chat#readme
 bug-reports:    https://github.com/satosystems/chat/issues
 author:         Satoshi Ogata
@@ -35,7 +37,7 @@ library
       base >=4.7 && <5
   default-language: Haskell2010
 
-executable chat-exe
+executable chat
   main-is: Main.hs
   other-modules:
       Paths_chat
@@ -47,7 +49,7 @@ executable chat-exe
     , chat
   default-language: Haskell2010
 
-test-suite chat-test
+test-suite test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
