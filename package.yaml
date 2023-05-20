@@ -1,10 +1,10 @@
 name: chat
 version: 0.1.0.0
-github: 'satosystems/chat'
+github: "satosystems/chat"
 license: BSD3
-author: 'Satoshi Ogata'
-maintainer: 'satosystems@gmail.com'
-copyright: '(c) 2023 Satoshi Ogata'
+author: "Satoshi Ogata"
+maintainer: "satosystems@gmail.com"
+copyright: "(c) 2023 Satoshi Ogata"
 
 extra-source-files:
   - README.md
