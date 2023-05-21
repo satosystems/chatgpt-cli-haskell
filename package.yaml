@@ -16,10 +16,13 @@ category: CLI
 description: Please see the README on GitHub at <https://github.com/satosystems/chatgpt-cli#readme>
 
 dependencies:
+  - aeson
   - base >= 4.7 && < 5
   - bytestring
+  - directory
   - http-streams
   - io-streams
+  - haskeline
   - string-conversions
 
 ghc-options:
