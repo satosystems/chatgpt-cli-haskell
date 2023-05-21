@@ -17,6 +17,10 @@ description: Please see the README on GitHub at <https://github.com/satosystems/
 
 dependencies:
   - base >= 4.7 && < 5
+  - bytestring
+  - http-streams
+  - io-streams
+  - string-conversions
 
 ghc-options:
   - -Wall

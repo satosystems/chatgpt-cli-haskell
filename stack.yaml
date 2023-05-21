@@ -3,3 +3,9 @@ resolver:
 
 packages:
   - .
+
+extra-include-dirs:
+  - /opt/homebrew/opt/openssl/include
+
+extra-lib-dirs:
+  - /opt/homebrew/opt/openssl/lib
