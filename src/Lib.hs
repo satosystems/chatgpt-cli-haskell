@@ -30,6 +30,28 @@ instance ToJSON Config
 
 instance FromJSON Config
 
+data ChatRequestMessage =
+  ChatRequestMessage
+    { role :: String
+    , content :: String
+    }
+  deriving (Generic, Read, Show)
+
+instance ToJSON ChatRequestMessage
+
+instance FromJSON ChatRequestMessage
+
+data ChatRequestBody =
+  ChatRequestBody
+    { model :: String
+    , messages :: [ChatRequestMessage]
+    }
+  deriving (Generic, Read, Show)
+
+instance ToJSON ChatRequestBody
+
+instance FromJSON ChatRequestBody
+
 exitFailure' :: String -> IO ()
 exitFailure' msg = do
   hPutStrLn stderr $ "\ESC[31m" ++ msg ++ "\ESC[0m"
@@ -64,7 +86,6 @@ run args = do
     (True, _) -> exitFailure' "Please chat message to CLI options"
     (_, Nothing) -> exitFailure' "Cannot read config file: ~/.chat"
     (_, Just (Config ak)) -> do
-      let content = (show . unwords) args
       ctx <- baselineContextSSL
       c <- openConnectionSSL ctx "api.openai.com" 443
       let q =
@@ -72,11 +93,13 @@ run args = do
               http POST "/v1/chat/completions"
               setContentType "application/json"
               setHeader "Authorization" $ cs $ "Bearer " ++ ak
-      sendRequest c q $
-        simpleBody $
-        cs $
-        "{\"model\": \"gpt-3.5-turbo\",\"messages\": [{\"role\": \"user\", \"content\": " ++
-        content ++ "}]}"
+      let body =
+            ChatRequestBody
+              { model = "gpt-3.5-turbo"
+              , messages =
+                  [ChatRequestMessage {role = "user", content = unwords args}]
+              }
+      sendRequest c q $ simpleBody $ cs $ encode body
       receiveResponse
         c
         (\_ is -> do
